@@ -6,11 +6,48 @@ body {
     color: #333;
 }
 
+/* Header styling */
 header {
-    text-align: center;
-    padding: 1em;
     background-color: #f0f0f0;
+    padding: 10px 20px;
 }
+
+.header-container {
+    display: flex;
+    align-items: center;           /* Verticaal centreren */
+    justify-content: flex-start;   /* Begin links, niet space-between */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    height: 120px;  /* gewenste hoogte */
+    width: auto;
+    margin-right: 20px; /* ruimte tussen logo en nav */
+}
+
+/* nav neemt de resterende breedte */
+nav {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-around;  /* of space-between */
+    align-items: center;
+}
+
+nav a {
+    margin-right: 30px;        /* ruimte tussen links */
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 18px;           /* iets groter voor betere leesbaarheid */
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: #007acc;
+}
+
+
 
 header h1 {
     margin: 0.5em 0;
