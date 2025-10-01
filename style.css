@@ -106,3 +106,88 @@ footer a {
 footer a:hover {
     color: #007acc; /* of een kleur die bij je site past */
 }
+
+.socials {
+    text-align: center;       /* zelfde als footer */
+    margin-top: 1em;
+}
+
+.socials a {
+    margin: 0 10px;           /* dezelfde spacing als footer links */
+    color: #333;              /* tekstkleur (hoewel img gebruikt wordt) */
+    text-decoration: none;
+    display: inline-block;    /* zodat margin werkt bij afbeeldingen */
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.socials a:hover {
+    color: #007acc;           /* dezelfde hover kleur als footer */
+}
+
+.social-icon {
+    width: 30px;              /* past bij je layout */
+    height: 30px;
+    vertical-align: middle;
+    transition: transform 0.2s;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);    /* lichte vergroting bij hover */
+}
+
+
+/* Contactformulier styling */
+.contact-form {
+    max-width: 600px;           /* beperkt de breedte */
+    margin: 30px auto;          /* center horizontaal met marge boven/onder */
+    padding: 20px;
+    background-color: #f9f9f9;  /* lichte achtergrond */
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.contact-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;     /* velden onder elkaar */
+    gap: 15px;                  /* ruimte tussen velden */
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;                /* neemt volledige breedte van container */
+    box-sizing: border-box;     /* padding + border inbegrepen */
+    resize: vertical;           /* textarea kan verticaal worden aangepast */
+}
+
+.contact-form textarea {
+    min-height: 120px;          /* voldoende ruimte voor bericht */
+}
+
+.contact-form button {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.contact-form button:hover {
+    background-color: #005f99;
+    transform: scale(1.02);
+}
+
+

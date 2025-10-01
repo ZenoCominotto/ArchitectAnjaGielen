@@ -27,7 +27,7 @@
         <section class="contact-info">
             <p><strong>Adres:</strong> Stationsstraat 123, 3500 Hasselt</p>
             <p><strong>Telefoon:</strong> <a href="tel:+32123456789">+32 12 34 56 789</a></p>
-            <p><strong>Email:</strong> <a href="mailto:info@jouwdomein.be">info@jouwdomein.be</a></p>
+            <p><strong>Email:</strong> <a href="mailto:zeno.cominotto@gmail.com">zeno.cominotto@gmail.com</a></p>
         </section>
 
         <section class="socials">
@@ -42,12 +42,13 @@
 
         <section class="contact-form">
             <h2>Stuur ons een bericht</h2>
-            <form>
-                <input type="text" placeholder="Naam" required>
-                <input type="email" placeholder="E-mail" required>
-                <textarea placeholder="Uw bericht..." required></textarea>
+            <form action="https://formspree.io/f/xgvnyeap" method="POST">
+                <input type="text" name="name" placeholder="Naam" required>
+                <input type="email" name="email" placeholder="E-mail" required>
+                <textarea name="message" placeholder="Uw bericht..." required></textarea>
                 <button type="submit">Verstuur</button>
             </form>
+
         </section>
     </main>
 
