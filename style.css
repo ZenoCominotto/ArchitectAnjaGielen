@@ -96,3 +96,13 @@ footer {
     background-color: #f0f0f0;
     margin-top: 2em;
 }
+
+footer a {
+    margin: 0 10px;
+    color: #333;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #007acc; /* of een kleur die bij je site past */
+}
