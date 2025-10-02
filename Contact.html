@@ -42,12 +42,14 @@
 
         <section class="contact-form">
             <h2>Stuur ons een bericht</h2>
-            <form action="https://formspree.io/f/xgvnyeap" method="POST">
+            <form id="contactForm">
                 <input type="text" name="name" placeholder="Naam" required>
                 <input type="email" name="email" placeholder="E-mail" required>
                 <textarea name="message" placeholder="Uw bericht..." required></textarea>
                 <button type="submit">Verstuur</button>
             </form>
+            <p id="formMessage"></p>
+
 
         </section>
     </main>
@@ -55,5 +57,35 @@
     <footer>
         <p>&copy; 2025 Architect Anja Gielen</p>
     </footer>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async function(e){
+            e.preventDefault();
+            const formData = {
+                name: e.target.name.value,
+                email: e.target.email.value,
+                message: e.target.message.value
+            };
+
+            try {
+                const response = await fetch('/.netlify/functions/sendEmail', {
+                    method: 'POST',
+                    body: JSON.stringify(formData)
+                });
+
+                const result = document.getElementById('formMessage');
+
+                if(response.ok){
+                    result.textContent = 'Bericht verzonden!';
+                    e.target.reset();
+                } else {
+                    result.textContent = 'Er is een fout opgetreden. Probeer later opnieuw.';
+                }
+            } catch (err) {
+                document.getElementById('formMessage').textContent = 'Er is een fout opgetreden. Probeer later opnieuw.';
+                console.error(err);
+            }
+        });
+    </script>
+
 </body>
 </html>
