@@ -1,3 +1,7 @@
+[build]
+  publish = "."            # waar je HTML/CSS staat
+  functions = "functions"  # waar je serverless functions staan
+
 [dev]
   port = 8888
   functions = "functions"
