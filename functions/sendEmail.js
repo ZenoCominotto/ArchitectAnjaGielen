@@ -1,28 +1,36 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 exports.handler = async function(event, context) {
     const data = JSON.parse(event.body);
 
-    // SMTP instellen (bijvoorbeeld Gmail)
+    // SMTP instellen (Gmail)
     const transporter = nodemailer.createTransport({
-        service: 'gmail',
+        service: "gmail",
         auth: {
-            user: process.env.EMAIL_USER,  // je Gmail
-            pass: process.env.EMAIL_PASS   // app password
+            user: process.env.EMAIL_USER, // jouw Gmail
+            pass: process.env.EMAIL_PASS  // app password
         }
     });
 
-    const mailOptions = {
-        from: data.email,
-        to: 'Zeno.Cominotto@gmail.com',
+    // Mail opties
+    let mailOptions = {
+        from: process.env.EMAIL_USER,    // van wie de mail komt (jouw Gmail)
+        to: process.env.EMAIL_USER,      // waar je het ontvangt
         subject: `Nieuw bericht van ${data.name}`,
-        text: data.message
+        text: data.message,
+        replyTo: data.email               // dit zorgt dat RE: naar de bezoeker gaat
     };
 
     try {
         await transporter.sendMail(mailOptions);
-        return { statusCode: 200, body: 'Email verzonden!' };
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ message: "Email succesvol verstuurd!" })
+        };
     } catch (error) {
-        return { statusCode: 500, body: 'Fout bij verzenden: ' + error.message };
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ message: "Fout bij verzenden email", error })
+        };
     }
 };
