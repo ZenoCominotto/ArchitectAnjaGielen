@@ -1,45 +1,59 @@
-body {
-    font-family: Arial, sans-serif;
+/* =============================
+   Algemeen
+============================= */
+html, body {
+    height: 100%;          /* Minimaal schermhoogte */
     margin: 0;
     padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* Header, main, footer verticaal stapelen */
+    min-height: 100vh;      /* Minimaal schermhoogte */
+    font-family: Arial, sans-serif;
     background-color: #fafafa;
     color: #333;
 }
 
-/* Header styling */
+/* =============================
+   Header
+============================= */
 header {
     background-color: #f0f0f0;
-    padding: 10px 20px;
+    padding: 0;
 }
 
 .header-container {
     display: flex;
-    align-items: center;           /* Verticaal centreren */
-    justify-content: flex-start;   /* Begin links, niet space-between */
+    align-items: center;
+    justify-content: flex-start;   /* Logo links, nav daarna */
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .logo {
-    height: 120px;  /* gewenste hoogte */
+    height: 100px;
     width: auto;
-    margin-right: 20px; /* ruimte tussen logo en nav */
+    margin-right: 20px;            /* Ruimte tussen logo en nav */
 }
 
-/* nav neemt de resterende breedte */
+/* =============================
+   Navigatie
+============================= */
 nav {
     display: flex;
     flex-grow: 1;
-    justify-content: space-around;  /* of space-between */
+    justify-content: space-around;
     align-items: center;
 }
 
 nav a {
-    margin-right: 30px;        /* ruimte tussen links */
+    margin: 0 15px;
     text-decoration: none;
     color: #333;
     font-weight: bold;
-    font-size: 18px;           /* iets groter voor betere leesbaarheid */
+    font-size: 18px;
     transition: color 0.2s;
 }
 
@@ -47,28 +61,18 @@ nav a:hover {
     color: #007acc;
 }
 
-
-
-header h1 {
-    margin: 0.5em 0;
-}
-
-nav a {
-    margin: 0 10px;
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-}
-
-nav a:hover {
-    color: #007acc;
-}
-
+/* =============================
+   Main content
+============================= */
 main {
+    flex: 1;                  /* Neemt alle resterende ruimte in */
     padding: 1em;
     text-align: center;
 }
 
+/* =============================
+   Gallery
+============================= */
 .gallery {
     display: flex;
     flex-wrap: wrap;
@@ -90,58 +94,14 @@ main {
     transform: scale(1.05);
 }
 
-footer {
-    text-align: center;
-    padding: 1em;
-    background-color: #f0f0f0;
-    margin-top: 2em;
-}
-
-footer a {
-    margin: 0 10px;
-    color: #333;
-    text-decoration: none;
-}
-
-footer a:hover {
-    color: #007acc; /* of een kleur die bij je site past */
-}
-
-.socials {
-    text-align: center;       /* zelfde als footer */
-    margin-top: 1em;
-}
-
-.socials a {
-    margin: 0 10px;           /* dezelfde spacing als footer links */
-    color: #333;              /* tekstkleur (hoewel img gebruikt wordt) */
-    text-decoration: none;
-    display: inline-block;    /* zodat margin werkt bij afbeeldingen */
-    transition: transform 0.2s, filter 0.2s;
-}
-
-.socials a:hover {
-    color: #007acc;           /* dezelfde hover kleur als footer */
-}
-
-.social-icon {
-    width: 30px;              /* past bij je layout */
-    height: 30px;
-    vertical-align: middle;
-    transition: transform 0.2s;
-}
-
-.social-icon:hover {
-    transform: scale(1.2);    /* lichte vergroting bij hover */
-}
-
-
-/* Contactformulier styling */
+/* =============================
+   Contactformulier
+============================= */
 .contact-form {
-    max-width: 600px;           /* beperkt de breedte */
-    margin: 30px auto;          /* center horizontaal met marge boven/onder */
+    max-width: 600px;
+    margin: 30px auto;
     padding: 20px;
-    background-color: #f9f9f9;  /* lichte achtergrond */
+    background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
@@ -155,8 +115,8 @@ footer a:hover {
 
 .contact-form form {
     display: flex;
-    flex-direction: column;     /* velden onder elkaar */
-    gap: 15px;                  /* ruimte tussen velden */
+    flex-direction: column;
+    gap: 15px;
 }
 
 .contact-form input,
@@ -165,13 +125,13 @@ footer a:hover {
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    width: 100%;                /* neemt volledige breedte van container */
-    box-sizing: border-box;     /* padding + border inbegrepen */
-    resize: vertical;           /* textarea kan verticaal worden aangepast */
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
 }
 
 .contact-form textarea {
-    min-height: 120px;          /* voldoende ruimte voor bericht */
+    min-height: 120px;
 }
 
 .contact-form button {
@@ -190,4 +150,50 @@ footer a:hover {
     transform: scale(1.02);
 }
 
+/* =============================
+   Footer
+============================= */
+footer {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    background-color: #f0f0f0;
+}
 
+/* Links in footer */
+footer a {
+    margin: 0 10px;
+    color: #333;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #007acc;
+}
+
+/* =============================
+   Social icons
+============================= */
+.socials {
+    text-align: center;
+    margin-top: 1em;
+}
+
+.socials a {
+    margin: 0 10px;
+    color: #333;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.social-icon {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    transition: transform 0.2s;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
+}
