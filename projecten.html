@@ -23,19 +23,27 @@
     <main>
         <h2>Projecten</h2>
         <div id="gallery"></div>
-        <script>
-        fetch("/.netlify/functions/getImages")
-            .then(res => res.json())
-            .then(images => {
-                const gallery = document.getElementById("gallery");
-                images.forEach(src => {
-                    const img = document.createElement("img");
-                    img.src = src;
-                    img.className = "gallery-image";
-                    gallery.appendChild(img);
-                    });
-            });
-        </script>
+
+    <script>
+        // Alle afbeeldingen in de Pictures-map
+        const images = [
+            "Pictures/test.jpg",
+            "Pictures/test2.jpg",
+        ];
+
+        const gallery = document.getElementById("gallery");
+
+        images.forEach(src => {
+            const img = document.createElement("img");
+            img.src = src;
+            // Pak de bestandsnaam van de path en gebruik als alt
+            img.alt = src.split("/").pop().replace(/\.[^/.]+$/, ""); 
+            img.className = "gallery-image";
+            gallery.appendChild(img);
+        });
+
+    </script>
+
     </main>
 
     <footer>

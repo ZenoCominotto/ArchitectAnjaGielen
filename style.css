@@ -125,20 +125,32 @@ main {
     justify-content: center;
     gap: 10px;
     margin-top: 1em;
+    padding: 0 10px; /* beetje ruimte aan de zijkanten op kleine schermen */
 }
 
-.gallery img {
+.gallery-image {
     max-width: 300px;
     width: 100%;
     height: auto;
-    border: 2px solid #ddd;
+    margin: 10px;
     border-radius: 5px;
     transition: transform 0.2s;
+    object-fit: cover; /* houdt verhoudingen netjes als je wilt croppen */
 }
 
-.gallery img:hover {
+.gallery-image:hover {
     transform: scale(1.05);
 }
+
+/* Media query voor kleinere schermen */
+@media (max-width: 600px) {
+    .gallery-image {
+        max-width: 100%; /* neemt volle breedte op mobiel */
+        margin: 5px 0;
+    }
+}
+
+
 
 /* =============================
    Contactformulier
