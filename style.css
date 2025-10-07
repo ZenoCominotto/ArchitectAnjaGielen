@@ -7,6 +7,14 @@ html, body {
     padding: 0;
 }
 
+@font-face {
+    font-family: "Century Gothic";
+    src: url("fonts/CenturyGothic.woff2") format("woff2"),
+         url("fonts/CenturyGothic.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     display: flex;
     flex-direction: column; /* Header, main, footer verticaal stapelen */
