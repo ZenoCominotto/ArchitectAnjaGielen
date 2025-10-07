@@ -22,6 +22,43 @@ body {
     font-family: "Century Gothic", Arial, sans-serif;
     background-color: #fafafa;
     color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Media query voor kleine schermen (mobiel) */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;  /* Logo boven nav */
+        align-items: center;     /* Alles centreren */
+    }
+
+    .logo {
+        height: 80px;           /* kleiner logo voor mobiel */
+        margin-right: 0;
+        margin-bottom: 10px;    /* ruimte tussen logo en nav */
+    }
+
+    nav {
+        flex-direction: column;  /* nav-links onder elkaar */
+        justify-content: center;
+        width: 100%;
+    }
+
+    nav a {
+        margin: 5px 0;          /* vertical spacing */
+        font-size: 16px;        /* kleinere letters */
+    }
+
+    .gallery {
+        flex-direction: column; /* afbeeldingen onder elkaar */
+        gap: 10px;
+    }
+
+    .contact-form {
+        margin: 20px 10px;      /* marges aanpassen voor mobiel */
+        padding: 15px;
+    }
 }
 
 /* =============================
@@ -72,10 +109,11 @@ nav a:hover {
 /* =============================
    Main content
 ============================= */
+/* Maak hoofdcontainer en main-content flexibel */
 main {
-    flex: 1;                  /* Neemt alle resterende ruimte in */
+    flex: 1;                /* Zorgt dat main de resterende ruimte opvult */
     padding: 1em;
-    text-align: center;
+    box-sizing: border-box;
 }
 
 /* =============================
