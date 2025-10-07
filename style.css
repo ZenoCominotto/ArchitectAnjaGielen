@@ -112,6 +112,7 @@ main {
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    font-family: "Century Gothic";
 }
 
 .contact-form h2 {
@@ -131,6 +132,7 @@ main {
 .contact-form textarea {
     padding: 12px;
     font-size: 16px;
+    font-family: "Century Gothic";
     border: 1px solid #ddd;
     border-radius: 5px;
     width: 100%;
@@ -145,6 +147,7 @@ main {
 .contact-form button {
     padding: 12px;
     font-size: 16px;
+    font-family: "Century Gothic";
     background-color: #007acc;
     color: white;
     border: none;
