@@ -22,10 +22,20 @@
 
     <main>
         <h2>Projecten</h2>
-        <div class="gallery">
-            <img src="images/project1.jpg" alt="Project 1">
-            <img src="images/project2.jpg" alt="Project 2">
-        </div>
+        <<div id="gallery"></div>
+        <script>
+        fetch("/.netlify/functions/getImages")
+            .then(res => res.json())
+            .then(images => {
+                const gallery = document.getElementById("gallery");
+                images.forEach(src => {
+                    const img = document.createElement("img");
+                    img.src = src;
+                    img.className = "gallery-image";
+                    gallery.appendChild(img);
+                    });
+            });
+        </script>
     </main>
 
     <footer>
