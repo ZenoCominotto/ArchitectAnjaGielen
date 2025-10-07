@@ -11,7 +11,7 @@ body {
     display: flex;
     flex-direction: column; /* Header, main, footer verticaal stapelen */
     min-height: 100vh;      /* Minimaal schermhoogte */
-    font-family: Arial, sans-serif;
+    font-family: "Century Gothic", Arial, sans-serif;
     background-color: #fafafa;
     color: #333;
 }
