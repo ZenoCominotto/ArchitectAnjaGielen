@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="https://www.google.com/schemas/sitemap-image/1.1">
+
+    <!-- Home pagina -->
+    <url>
+        <loc>https://www.architectgielen.be/</loc>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Over ons pagina -->
+    <url>
+        <loc>https://www.architectgielen.be/about.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Projecten pagina -->
+    <url>
+        <loc>https://www.architectgielen.be/projecten.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <!-- Voorbeeld afbeeldingen -->
+        <image:image>
+            <image:loc>https://www.architectgielen.be/Pictures/project1.jpg</image:loc>
+            <image:caption>Project 1 - Moderne woning</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://www.architectgielen.be/Pictures/project2.jpg</image:loc>
+            <image:caption>Project 2 - Interieur ontwerp</image:caption>
+        </image:image>
+    </url>
+
+    <!-- Contact pagina -->
+    <url>
+        <loc>https://www.architectgielen.be/contact.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+</urlset>

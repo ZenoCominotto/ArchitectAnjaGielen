@@ -1,0 +1,9 @@
+# robots.txt voor architectgielen.be
+
+# Toestaan dat alle zoekmachines de site indexeren
+User-agent: *
+Disallow: /private/      # optioneel: map die je niet wilt indexeren
+Disallow: /tmp/          # optioneel: tijdelijke bestanden
+
+# Sitemap verwijzen zodat zoekmachines alles sneller kunnen vinden
+Sitemap: https://www.architectgielen.be/sitemap.xml

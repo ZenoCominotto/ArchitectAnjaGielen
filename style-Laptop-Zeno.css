@@ -1,0 +1,260 @@
+/* =============================
+   Algemeen
+============================= */
+html, body {
+    height: 100%;          /* Minimaal schermhoogte */
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: "Century Gothic";
+    src: url("fonts/CenturyGothic.woff2") format("woff2"),
+         url("fonts/CenturyGothic.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* Header, main, footer verticaal stapelen */
+    min-height: 100vh;      /* Minimaal schermhoogte */
+    font-family: "Century Gothic", Arial, sans-serif;
+    background-color: #fafafa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Media query voor kleine schermen (mobiel) */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;  /* Logo boven nav */
+        align-items: center;     /* Alles centreren */
+    }
+
+    .logo {
+        height: 80px;           /* kleiner logo voor mobiel */
+        margin-right: 0;
+        margin-bottom: 10px;    /* ruimte tussen logo en nav */
+    }
+
+    nav {
+        flex-direction: column;  /* nav-links onder elkaar */
+        justify-content: center;
+        width: 100%;
+    }
+
+    nav a {
+        margin: 5px 0;          /* vertical spacing */
+        font-size: 16px;        /* kleinere letters */
+    }
+
+    .gallery {
+        flex-direction: column; /* afbeeldingen onder elkaar */
+        gap: 10px;
+    }
+
+    .contact-form {
+        margin: 20px 10px;      /* marges aanpassen voor mobiel */
+        padding: 15px;
+    }
+}
+
+/* =============================
+   Header
+============================= */
+header {
+    background-color: #f0f0f0;
+    padding: 0;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;   /* Logo links, nav daarna */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    height: 100px;
+    width: auto;
+    margin-right: 20px;            /* Ruimte tussen logo en nav */
+}
+
+/* =============================
+   Navigatie
+============================= */
+nav {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: #007acc;
+}
+
+/* =============================
+   Main content
+============================= */
+/* Maak hoofdcontainer en main-content flexibel */
+main {
+    flex: 1;                /* Zorgt dat main de resterende ruimte opvult */
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+/* =============================
+   Gallery
+============================= */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 1em;
+    padding: 0 10px; /* beetje ruimte aan de zijkanten op kleine schermen */
+}
+
+.gallery-image {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    margin: 10px;
+    border-radius: 5px;
+    transition: transform 0.2s;
+    object-fit: cover; /* houdt verhoudingen netjes als je wilt croppen */
+}
+
+.gallery-image:hover {
+    transform: scale(1.05);
+}
+
+/* Media query voor kleinere schermen */
+@media (max-width: 600px) {
+    .gallery-image {
+        max-width: 100%; /* neemt volle breedte op mobiel */
+        margin: 5px 0;
+    }
+}
+
+
+
+/* =============================
+   Contactformulier
+============================= */
+.contact-form {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    font-family: "Century Gothic";
+}
+
+.contact-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 12px;
+    font-size: 16px;
+    font-family: "Century Gothic";
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.contact-form textarea {
+    min-height: 120px;
+}
+
+.contact-form button {
+    padding: 12px;
+    font-size: 16px;
+    font-family: "Century Gothic";
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.contact-form button:hover {
+    background-color: #005f99;
+    transform: scale(1.02);
+}
+
+/* =============================
+   Footer
+============================= */
+footer {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    background-color: #f0f0f0;
+}
+
+/* Links in footer */
+footer a {
+    margin: 0 10px;
+    color: #333;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #007acc;
+}
+
+/* =============================
+   Social icons
+============================= */
+.socials {
+    text-align: center;
+    margin-top: 1em;
+}
+
+.socials a {
+    margin: 0 10px;
+    color: #333;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.social-icon {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    transition: transform 0.2s;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
+}
