@@ -24,34 +24,89 @@
         <h2 class="page-title">Projecten</h2>
         <div id="gallery"></div>
 
-        <section class="project" id="project1">
-            <h3>Project 1: Modern Huis</h3>
-            <div class="project-gallery">
-                <img src="Pictures/test.jpg" alt="Modern Huis" class="gallery-image">
-                <img src="Pictures/test2.jpg" alt="test" class="gallery-image">
-                <img src="Pictures/test.jpg" alt="Modern Huis" class="gallery-image">
-                <img src="Pictures/test2.jpg" alt="test" class="gallery-image">
+        <section class="home-projects" aria-label="Recente projecten">
+
+            <div class="project-slider" aria-roledescription="carousel" aria-label="Projecten slider">
+                <button class="ps-btn ps-btn-prev" aria-label="Vorige project">‹</button>
+
+                <div class="ps-viewport">
+                <ul class="ps-track">
+                    <!-- PROJECT 1 -->
+                    <li class="ps-slide" aria-roledescription="slide">
+                    <a href="#"
+                        class="ps-card"
+                        data-gallery="#gal-modern-huis">
+                        <img src="Pictures/test.jpg" alt="Modern huis – overzicht" class="gallery-image">
+                        <h3>Modern huis</h3>
+                        <p>Daglicht, open plan.</p>
+                    </a>
+                    </li>
+
+                    <!-- PROJECT 2 -->
+                    <li class="ps-slide" aria-roledescription="slide">
+                    <a href="#"
+                        class="ps-card"
+                        data-gallery="#gal-stadstuin">
+                        <img src="Pictures/test.jpg" alt="Renovatie met stadstuin – overzicht" class="gallery-image">
+                        <h3>Renovatie stadstuin</h3>
+                        <p>Warm materiaalgebruik.</p>
+                    </a>
+                    </li>
+
+                    <!-- PROJECT 3 -->
+                    <li class="ps-slide" aria-roledescription="slide">
+                    <a href="#"
+                        class="ps-card"
+                        data-gallery="#gal-landelijk">
+                        <img src="Pictures/project3/thumb.jpg" alt="Landelijke woning – overzicht" class="gallery-image">
+                        <h3>Landelijke woning</h3>
+                        <p>Tijdloos en rustig.</p>
+                    </a>
+                    </li>
+                </ul>
+                </div>
+
+                <button class="ps-btn ps-btn-next" aria-label="Volgende project">›</button>
             </div>
-            <p>Een moderne woning ontworpen met veel licht en open ruimtes.</p>
+
+            <!-- Verborgen galerijen (koppel via data-gallery) -->
+            <div id="galleries" hidden>
+                <div id="gal-modern-huis" class="gallery-set">
+                <img src="Pictures/test.jpg" alt="Modern huis – leefruimte">
+                <img src="Pictures/test2.jpg" alt="Modern huis – keuken">
+                <img src="Pictures/project1/03.jpg" alt="Modern huis – buitenaanzicht">
+                </div>
+
+                <div id="gal-stadstuin" class="gallery-set">
+                <img src="Pictures/project2/01.jpg" alt="Stadstuin – zithoek">
+                <img src="Pictures/project2/02.jpg" alt="Stadstuin – eetruimte">
+                <img src="Pictures/project2/03.jpg" alt="Stadstuin – patio">
+                </div>
+
+                <div id="gal-landelijk" class="gallery-set">
+                <img src="Pictures/project3/01.jpg" alt="Landelijke woning – gevel">
+                <img src="Pictures/project3/02.jpg" alt="Landelijke woning – keuken">
+                </div>
+            </div>
+            </section>
+
+            <!-- Lightbox / Overlay -->
+            <div class="lb" id="lightbox" aria-modal="true" role="dialog" hidden>
+            <button class="lb-close" aria-label="Sluiten">×</button>
+            <button class="lb-nav lb-prev" aria-label="Vorige foto">‹</button>
+            <figure class="lb-stage">
+                <img id="lb-image" alt="">
+                <figcaption id="lb-caption"></figcaption>
+            </figure>
+            <button class="lb-nav lb-next" aria-label="Volgende foto">›</button>
+            </div>
+
+
+        <p style="text-align:center; margin-top: 10px;">
+            <a class="btn-link" href="projecten.html">Bekijk alle projecten →</a>
+        </p>
         </section>
 
-        <section class="project" id="project2">
-            <h3>Project 2: Kantoor Renovatie</h3>
-            <div class="project-gallery">
-                <img src="Pictures/test.jpg" alt="Modern Huis" class="gallery-image">
-                <img src="Pictures/test2.jpg" alt="test" class="gallery-image">
-            </div>
-            <p>Renovatie van een kantoorruimte met duurzame materialen.</p>
-        </section>
-
-        <section class="project" id="project3">
-            <h3>Project 3: Interieur Design</h3>
-            <div class="project-gallery">
-                <img src="Pictures/test.jpg" alt="Modern Huis" class="gallery-image">
-                <img src="Pictures/test2.jpg" alt="test" class="gallery-image">
-            </div>
-            <p>Interieurontwerp voor een gezellig en functioneel leefruimte.</p>
-        </section>
 
     </main>
 
@@ -64,5 +119,166 @@
             <i class="fab fa-facebook fa-2x"></i>
         </a>
     </footer>
+
+    <script>
+        // Fallback class verwijderen
+        document.documentElement.classList.remove('no-js');
+
+        (function () {
+            // ======= PROJECT SLIDER =======
+            const slider = document.querySelector('.project-slider');
+            if (slider) {
+            const track = slider.querySelector('.ps-track');
+            const slides = Array.from(slider.querySelectorAll('.ps-slide'));
+            const prevBtn = slider.querySelector('.ps-btn-prev');
+            const nextBtn = slider.querySelector('.ps-btn-next');
+
+            let index = 0;
+            let slidesPerView = getSlidesPerView();
+
+            function getSlidesPerView() {
+                const w = window.innerWidth;
+                if (w <= 640) return 1;
+                if (w <= 1024) return 2;
+                return 3;
+            }
+
+            function maxIndex() {
+                return Math.max(0, slides.length - slidesPerView);
+            }
+
+            function updateButtons() {
+                prevBtn.disabled = (index <= 0);
+                nextBtn.disabled = (index >= maxIndex());
+            }
+
+            function update() {
+                const slideW = slides[0].getBoundingClientRect().width + 20; // padding 2*10px
+                track.style.transform = `translate3d(${-index * slideW}px,0,0)`;
+                updateButtons();
+            }
+
+            function go(delta) {
+                index = Math.min(maxIndex(), Math.max(0, index + delta));
+                update();
+            }
+
+            prevBtn?.addEventListener('click', () => go(-1));
+            nextBtn?.addEventListener('click', () => go(1));
+
+            let startX = 0, isDown = false;
+            slider.addEventListener('pointerdown', (e) => { isDown = true; startX = e.clientX; });
+            window.addEventListener('pointerup', (e) => {
+                if (!isDown) return;
+                const dx = e.clientX - startX;
+                if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+                isDown = false;
+            });
+
+            window.addEventListener('resize', () => {
+                const newSpv = getSlidesPerView();
+                if (newSpv !== slidesPerView) { slidesPerView = newSpv; index = 0; }
+                update();
+            });
+
+            update();
+            }
+
+            // ======= LIGHTBOX (per project meerdere foto's) =======
+            const lightbox = document.getElementById('lightbox');
+            const imgEl = document.getElementById('lb-image');
+            const capEl = document.getElementById('lb-caption');
+            const btnPrev = lightbox?.querySelector('.lb-prev');
+            const btnNext = lightbox?.querySelector('.lb-next');
+            const btnClose = lightbox?.querySelector('.lb-close');
+
+            let current = 0;
+            let items = []; // [{src, alt}...]
+
+            function openLightbox(list, startIndex = 0) {
+            items = list;
+            current = startIndex;
+            render();
+            lightbox.hidden = false;
+            document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+            lightbox.hidden = true;
+            document.body.style.overflow = '';
+            items = [];
+            }
+
+            function render() {
+            const it = items[current];
+            if (!it) return;
+            imgEl.src = it.src;
+            imgEl.alt = it.alt || '';
+            capEl.textContent = it.alt || '';
+            // prefetch buren (kleine optimalisatie)
+            const next = new Image(), prev = new Image();
+            next.src = items[(current + 1) % items.length]?.src || '';
+            prev.src = items[(current - 1 + items.length) % items.length]?.src || '';
+            }
+
+            function next() {
+            current = (current + 1) % items.length;
+            render();
+            }
+
+            function prev() {
+            current = (current - 1 + items.length) % items.length;
+            render();
+            }
+
+            // Klik op projectkaart: pak beelden uit gekoppelde hidden gallery
+            document.addEventListener('click', (e) => {
+            const link = e.target.closest('.ps-card[data-gallery]');
+            if (!link) return;
+
+            e.preventDefault();
+            const sel = link.getAttribute('data-gallery');
+            const gal = document.querySelector(sel);
+            if (!gal) return;
+
+            const imgs = Array.from(gal.querySelectorAll('img'));
+            const list = imgs.map(img => ({ src: img.getAttribute('src'), alt: img.getAttribute('alt') || '' }));
+
+            // start op 0, of gebruik thumb-match (optioneel)
+            openLightbox(list, 0);
+            });
+
+            // Bediening
+            btnNext?.addEventListener('click', next);
+            btnPrev?.addEventListener('click', prev);
+            btnClose?.addEventListener('click', closeLightbox);
+
+            // Sluiten op klik buiten beeld (overlay)
+            lightbox?.addEventListener('click', (e) => {
+            const clickedInside = e.target.closest('.lb-stage') || e.target.closest('.lb-nav') || e.target.closest('.lb-close');
+            if (!clickedInside) closeLightbox();
+            });
+
+            // Keyboard
+            window.addEventListener('keydown', (e) => {
+            if (lightbox?.hidden) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') next();
+            if (e.key === 'ArrowLeft') prev();
+            });
+
+            // Swipe op lightbox
+            let sx = 0, down = false;
+            lightbox?.addEventListener('pointerdown', (e) => { down = true; sx = e.clientX; });
+            window.addEventListener('pointerup', (e) => {
+            if (!down || lightbox?.hidden) return;
+            const dx = e.clientX - sx;
+            if (Math.abs(dx) > 40) (dx < 0 ? next() : prev());
+            down = false;
+            });
+        })();
+    </script>
+
+
 </body>
 </html>
