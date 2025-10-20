@@ -19,7 +19,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-family: "Century Gothic", Arial, sans-serif;
+    font-family: "Century Gothic";
     background-color: #fafafa;
     color: #333;
 }
