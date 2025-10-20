@@ -1,8 +1,8 @@
 /* =============================
-   Algemeen
+   ALGEMEEN
 ============================= */
 html, body {
-    height: 100%;          /* Minimaal schermhoogte */
+    height: 100%;
     margin: 0;
     padding: 0;
 }
@@ -17,62 +17,31 @@ html, body {
 
 body {
     display: flex;
-    flex-direction: column; /* Header, main, footer verticaal stapelen */
-    min-height: 100vh;      /* Minimaal schermhoogte */
+    flex-direction: column;
+    min-height: 100vh;
     font-family: "Century Gothic", Arial, sans-serif;
     background-color: #fafafa;
     color: #333;
-    margin: 0;
-    padding: 0;
-}
-
-/* Media query voor kleine schermen (mobiel) */
-@media (max-width: 768px) {
-    .header-container {
-        flex-direction: column;  /* Logo boven nav */
-        align-items: center;     /* Alles centreren */
-    }
-
-    .logo {
-        height: 80px;           /* kleiner logo voor mobiel */
-        margin-right: 0;
-        margin-bottom: 10px;    /* ruimte tussen logo en nav */
-    }
-
-    nav {
-        flex-direction: column;  /* nav-links onder elkaar */
-        justify-content: center;
-        width: 100%;
-    }
-
-    nav a {
-        margin: 5px 0;          /* vertical spacing */
-        font-size: 16px;        /* kleinere letters */
-    }
-
-    .gallery {
-        flex-direction: column; /* afbeeldingen onder elkaar */
-        gap: 10px;
-    }
-
-    .contact-form {
-        margin: 20px 10px;      /* marges aanpassen voor mobiel */
-        padding: 15px;
-    }
 }
 
 /* =============================
-   Header
+   HEADER
 ============================= */
 header {
     background-color: #f0f0f0;
     padding: 0;
 }
 
+.page-title {
+    text-align: center;
+    margin: 24px auto 16px;
+    font-size: 28px;
+}
+
 .header-container {
     display: flex;
     align-items: center;
-    justify-content: flex-start;   /* Logo links, nav daarna */
+    justify-content: flex-start;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -80,11 +49,11 @@ header {
 .logo {
     height: 100px;
     width: auto;
-    margin-right: 20px;            /* Ruimte tussen logo en nav */
+    margin-right: 20px;
 }
 
 /* =============================
-   Navigatie
+   NAVIGATIE
 ============================= */
 nav {
     display: flex;
@@ -107,17 +76,16 @@ nav a:hover {
 }
 
 /* =============================
-   Main content
+   MAIN CONTENT
 ============================= */
-/* Maak hoofdcontainer en main-content flexibel */
 main {
-    flex: 1;                /* Zorgt dat main de resterende ruimte opvult */
+    flex: 1;
     padding: 1em;
     box-sizing: border-box;
 }
 
 /* =============================
-   Gallery
+   GALLERY
 ============================= */
 .gallery {
     display: flex;
@@ -125,7 +93,7 @@ main {
     justify-content: center;
     gap: 10px;
     margin-top: 1em;
-    padding: 0 10px; /* beetje ruimte aan de zijkanten op kleine schermen */
+    padding: 0 10px;
 }
 
 .gallery-image {
@@ -135,26 +103,73 @@ main {
     margin: 10px;
     border-radius: 5px;
     transition: transform 0.2s;
-    object-fit: cover; /* houdt verhoudingen netjes als je wilt croppen */
+    object-fit: cover;
 }
 
 .gallery-image:hover {
     transform: scale(1.05);
 }
 
-/* Media query voor kleinere schermen */
-@media (max-width: 600px) {
-    .gallery-image {
-        max-width: 100%; /* neemt volle breedte op mobiel */
-        margin: 5px 0;
-    }
+/* =============================
+   PROJECTEN
+============================= */
+.project {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
+.project h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
 
+.project p {
+    font-size: 16px;
+    color: #555;
+}
+
+.project img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+/* Projectgalerij */
+.project-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    justify-items: center;
+    margin: 20px 0;
+}
+
+.project-gallery img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-gallery img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
 
 /* =============================
-   Contactformulier
+   CONTACTFORMULIER
 ============================= */
+.contact-info {
+    text-align: center;
+}
+
 .contact-form {
     max-width: 600px;
     margin: 30px auto;
@@ -212,16 +227,14 @@ main {
 }
 
 /* =============================
-   Footer
+   FOOTER
 ============================= */
 footer {
     text-align: center;
-    padding-top: 5px;
-    padding-bottom: 10px;
+    padding: 5px 0 10px;
     background-color: #f0f0f0;
 }
 
-/* Links in footer */
 footer a {
     margin: 0 10px;
     color: #333;
@@ -233,7 +246,7 @@ footer a:hover {
 }
 
 /* =============================
-   Social icons
+   SOCIALS
 ============================= */
 .socials {
     text-align: center;
@@ -257,4 +270,267 @@ footer a:hover {
 
 .social-icon:hover {
     transform: scale(1.2);
+}
+
+/* =============================
+   MEDIA QUERIES
+============================= */
+
+/* Kleinere schermen (mobiel) */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo {
+        height: 80px;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    nav {
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+    }
+
+    nav a {
+        margin: 5px 0;
+        font-size: 16px;
+    }
+
+    .gallery {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .contact-form {
+        margin: 20px 10px;
+        padding: 15px;
+    }
+}
+
+/* Extra kleine schermen */
+@media (max-width: 700px) {
+    .project-gallery {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .gallery-image {
+        max-width: 100%;
+        margin: 5px 0;
+    }
+}
+
+/* =============================
+   Hero-sectie
+============================= */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(70%);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-text {
+  text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 20px 40px;
+  border-radius: 10px;
+}
+
+.btn-primary {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #007acc;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #005f99;
+}
+
+/* =============================
+   Introblok
+============================= */
+.intro {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+.intro-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+  justify-content: center;
+}
+
+.intro-text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.intro-text p {
+  font-size: 18px;
+  color: #555;
+}
+
+.intro-image {
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* =============================
+   Project preview
+============================= */
+.home-projects {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.home-projects h2 {
+  margin-bottom: 20px;
+}
+
+.btn-link {
+  color: #007acc;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+/* Mobiel */
+@media (max-width: 768px) {
+  .hero-text {
+    font-size: 90%;
+    padding: 15px 20px;
+  }
+
+  .intro-container {
+    flex-direction: column;
+  }
+
+  .intro-image {
+    width: 80%;
+  }
+}
+
+/* =============================
+   Over mij pagina
+============================= */
+.page-header {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.page-header h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.page-header .subtitle {
+  color: #555;
+  font-size: 18px;
+}
+
+.about-section {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+  justify-content: center;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.about-text h2 {
+  margin-bottom: 15px;
+}
+
+.about-text p {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.about-image {
+  width: 320px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.light-bg {
+  background-color: #f7f7f7;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.vision-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.vision-container p {
+  font-size: 18px;
+  color: #444;
+  line-height: 1.6;
+}
+
+blockquote {
+  margin-top: 25px;
+  font-style: italic;
+  color: #007acc;
+  font-size: 20px;
+}
+
+.centered {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+  }
+  .about-image {
+    width: 80%;
+  }
 }

@@ -1,43 +1,85 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Architect Anja Gielen</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architect Anja Gielen</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <img src="Pictures/Logo.png" alt="Logo" class="logo">
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="about.html">Over mij</a>
-                <a href="projecten.html">Projecten</a>
-                <a href="contact.html">Contact</a>
-            </nav>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="header-container">
+      <img src="Pictures/Logo.png" alt="Logo Anja Gielen Architect" class="logo">
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">Over mij</a>
+        <a href="projecten.html">Projecten</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== HERO SECTIE ===== -->
+    <section class="hero">
+      <img src="Pictures/test.jpg" alt="Modern huis" class="hero-image">
+      <div class="hero-overlay">
+        <div class="hero-text">
+          <h1>Tijdloze architectuur</h1>
+          <p>Met oog voor licht, eenvoud en detail.</p>
+          <a href="projecten.html" class="btn-primary">Bekijk projecten</a>
         </div>
-    </header>
+      </div>
+    </section>
 
-
-    <main id="portfolio">
-        <h2>Projecten</h2>
-        <div class="gallery">
-            <img src="images/project1.jpg" alt="Project 1">
-            <img src="images/project2.jpg" alt="Project 2">
-            <!-- meer foto’s -->
+    <!-- ===== KORTE INTRO ===== -->
+    <section class="intro">
+      <div class="intro-container">
+        <div class="intro-text">
+          <h2>Over Anja Gielen</h2>
+          <p>
+            Anja Gielen is een Belgische architecte gespecialiseerd in moderne en duurzame woningen.
+            Elk ontwerp ontstaat uit een nauwe samenwerking met de opdrachtgever en de omgeving,
+            met oog voor licht, ruimte en verfijnd detail.
+          </p>
+          <a href="about.html" class="btn-link">Meer over mij →</a>
         </div>
-    </main>
+        <img src="Pictures/anja.jpg" alt="Portret van Anja Gielen" class="intro-image">
+      </div>
+    </section>
 
-    <footer>
-        <p>Contact: <a href="mailto:anja@architectgielen.be">anja@architectgielen.be</a></p>
-        <a href="https://www.instagram.com/architectanjagielen" target="_blank">
-            <i class="fab fa-instagram fa-2x"></i>
+    <!-- ===== PROJECT PREVIEW ===== -->
+    <section class="home-projects">
+      <h2>Recente projecten</h2>
+      <div class="project-gallery">
+        <a href="projecten.html">
+          <img src="Pictures/test.jpg" alt="Modern huis" class="gallery-image">
         </a>
-        <a href="https://www.facebook.com/architectgielen" target="_blank">
-            <i class="fab fa-facebook fa-2x"></i>
+        <a href="projecten.html">
+          <img src="Pictures/test2.jpg" alt="Modern huis 2" class="gallery-image">
         </a>
-    </footer>
+      </div>
+      <p style="text-align:center; margin-top:10px;">
+        <a href="projecten.html" class="btn-link">Bekijk alle projecten →</a>
+      </p>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>Contact: <a href="mailto:anja@architectgielen.be">anja@architectgielen.be</a></p>
+    <div class="socials">
+      <a href="https://www.instagram.com/architectanjagielen" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram fa-2x"></i>
+      </a>
+      <a href="https://www.facebook.com/architectgielen" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook fa-2x"></i>
+      </a>
+    </div>
+  </footer>
+
 </body>
 </html>

@@ -1,39 +1,89 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Over ons - Architectenbureau [Naam]</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Over mij – Architect Anja Gielen</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <img src="Pictures/Logo.png" alt="Logo" class="logo">
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="about.html">Over mij</a>
-                <a href="projecten.html">Projecten</a>
-                <a href="contact.html">Contact</a>
-            </nav>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="header-container">
+      <img src="Pictures/Logo.png" alt="Logo Anja Gielen Architect" class="logo">
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">Over mij</a>
+        <a href="projecten.html">Projecten</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== PAGETITLE ===== -->
+    <section class="page-header">
+      <h1>Over mij</h1>
+      <p class="subtitle">Architectuur met oog voor licht, ruimte en eenvoud</p>
+    </section>
+
+    <!-- ===== INTRO / BIO ===== -->
+    <section class="about-section">
+      <div class="about-container">
+        <img src="Pictures/anja.jpg" alt="Architect Anja Gielen" class="about-image">
+
+        <div class="about-text">
+          <h2>Wie ik ben</h2>
+          <p>
+            Ik ben Anja Gielen, architecte met een passie voor hedendaagse, heldere architectuur.
+            Mijn werk draait rond het creëren van tijdloze ruimtes waarin licht, eenvoud en
+            functionaliteit centraal staan. Elk project is voor mij een evenwichtsoefening tussen
+            esthetiek, duurzaamheid en comfort.
+          </p>
+          <p>
+            In elk ontwerp vertrek ik vanuit de wensen van de opdrachtgever, de omgeving en het licht.
+            Samen zoeken we naar oplossingen die niet alleen vandaag werken, maar ook in de toekomst blijven inspireren.
+          </p>
         </div>
-    </header>
+      </div>
+    </section>
 
+    <!-- ===== VISIE / AANPAK ===== -->
+    <section class="about-section light-bg">
+      <div class="vision-container">
+        <h2>Mijn visie</h2>
+        <p>
+          Architectuur is voor mij meer dan het bouwen van muren en daken — het gaat over beleving.
+          Hoe een ruimte aanvoelt, hoe daglicht binnenvalt, hoe materiaal en textuur met elkaar in dialoog gaan.
+          Ik geloof dat de kracht van eenvoud en detail zorgt voor duurzame en aangename leefomgevingen.
+        </p>
+        <blockquote>
+          “Goede architectuur laat ruimte voor licht, rust en leven.”
+        </blockquote>
+      </div>
+    </section>
 
-    <main>
-        <h2>Over ons</h2>
-        <p>Hier kan je info over het bureau, team of filosofie plaatsen.</p>
-    </main>
+    <!-- ===== CTA NAAR PROJECTEN ===== -->
+    <section class="about-section centered">
+      <h2>Ontdek mijn realisaties</h2>
+      <a href="projecten.html" class="btn-primary">Bekijk projecten</a>
+    </section>
+  </main>
 
-    <footer>
-        <p>Contact: <a href="mailto:anja@architectgielen.be">anja@architectgielen.be</a></p>
-        <a href="https://www.instagram.com/architectanjagielen" target="_blank">
-            <i class="fab fa-instagram fa-2x"></i>
-        </a>
-        <a href="https://www.facebook.com/architectgielen" target="_blank">
-            <i class="fab fa-facebook fa-2x"></i>
-        </a>
-    </footer>
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>Contact: <a href="mailto:anja@architectgielen.be">anja@architectgielen.be</a></p>
+    <div class="socials">
+      <a href="https://www.instagram.com/architectanjagielen" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram fa-2x"></i>
+      </a>
+      <a href="https://www.facebook.com/architectgielen" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook fa-2x"></i>
+      </a>
+    </div>
+  </footer>
+
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projecten - Architectenbureau [Naam]</title>
+    <title>Projecten - Architectenbureau Anja Gielen</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -21,28 +21,37 @@
     </header>
 
     <main>
-        <h2>Projecten</h2>
+        <h2 class="page-title">Projecten</h2>
         <div id="gallery"></div>
 
-    <script>
-        // Alle afbeeldingen in de Pictures-map
-        const images = [
-            "Pictures/test.jpg",
-            "Pictures/test2.jpg",
-        ];
+        <section class="project" id="project1">
+            <h3>Project 1: Modern Huis</h3>
+            <div class="project-gallery">
+                <img src="Pictures/test.jpg" alt="Modern Huis" class="gallery-image">
+                <img src="Pictures/test2.jpg" alt="test" class="gallery-image">
+                <img src="Pictures/test.jpg" alt="Modern Huis" class="gallery-image">
+                <img src="Pictures/test2.jpg" alt="test" class="gallery-image">
+            </div>
+            <p>Een moderne woning ontworpen met veel licht en open ruimtes.</p>
+        </section>
 
-        const gallery = document.getElementById("gallery");
+        <section class="project" id="project2">
+            <h3>Project 2: Kantoor Renovatie</h3>
+            <div class="project-gallery">
+                <img src="Pictures/test.jpg" alt="Modern Huis" class="gallery-image">
+                <img src="Pictures/test2.jpg" alt="test" class="gallery-image">
+            </div>
+            <p>Renovatie van een kantoorruimte met duurzame materialen.</p>
+        </section>
 
-        images.forEach(src => {
-            const img = document.createElement("img");
-            img.src = src;
-            // Pak de bestandsnaam van de path en gebruik als alt
-            img.alt = src.split("/").pop().replace(/\.[^/.]+$/, ""); 
-            img.className = "gallery-image";
-            gallery.appendChild(img);
-        });
-
-    </script>
+        <section class="project" id="project3">
+            <h3>Project 3: Interieur Design</h3>
+            <div class="project-gallery">
+                <img src="Pictures/test.jpg" alt="Modern Huis" class="gallery-image">
+                <img src="Pictures/test2.jpg" alt="test" class="gallery-image">
+            </div>
+            <p>Interieurontwerp voor een gezellig en functioneel leefruimte.</p>
+        </section>
 
     </main>
 
