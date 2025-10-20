@@ -196,39 +196,39 @@
             let items = []; // [{src, alt}...]
 
             function openLightbox(list, startIndex = 0) {
-            items = list;
-            current = startIndex;
-            render();
-            lightbox.hidden = false;
-            document.body.style.overflow = 'hidden';
+                items = list;
+                current = startIndex;
+                render();
+                lightbox.hidden = false;
+                document.body.style.overflow = 'hidden';
             }
 
             function closeLightbox() {
-            lightbox.hidden = true;
-            document.body.style.overflow = '';
-            items = [];
+                lightbox.hidden = true;
+                document.body.style.overflow = '';
+                items = [];
             }
 
             function render() {
-            const it = items[current];
-            if (!it) return;
-            imgEl.src = it.src;
-            imgEl.alt = it.alt || '';
-            capEl.textContent = it.alt || '';
-            // prefetch buren (kleine optimalisatie)
-            const next = new Image(), prev = new Image();
-            next.src = items[(current + 1) % items.length]?.src || '';
-            prev.src = items[(current - 1 + items.length) % items.length]?.src || '';
+                const it = items[current];
+                if (!it) return;
+                imgEl.src = it.src;
+                imgEl.alt = it.alt || '';
+                capEl.textContent = it.alt || '';
+                // prefetch buren (kleine optimalisatie)
+                const next = new Image(), prev = new Image();
+                next.src = items[(current + 1) % items.length]?.src || '';
+                prev.src = items[(current - 1 + items.length) % items.length]?.src || '';
             }
 
             function next() {
-            current = (current + 1) % items.length;
-            render();
+                current = (current + 1) % items.length;
+                render();
             }
 
             function prev() {
-            current = (current - 1 + items.length) % items.length;
-            render();
+                current = (current - 1 + items.length) % items.length;
+                render();
             }
 
             // Klik op projectkaart: pak beelden uit gekoppelde hidden gallery

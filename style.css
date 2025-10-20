@@ -698,3 +698,27 @@ blockquote {
   #lb-image { max-height: 60vh; }
 }
 
+/* --- Lightbox stacking fixes --- */
+.lb { isolation: isolate; } /* eigen stacking-context, voorkomt externe interferentie */
+
+.lb-stage {
+  position: relative;  /* maak z-index werkzaam */
+  z-index: 1;          /* lager dan knoppen */
+}
+
+.lb-close,
+.lb-nav {
+  position: relative;  /* nodig voor z-index */
+  z-index: 3;          /* boven de foto */
+}
+
+/* Vergroot tikvlak op mobiel en zorg dat knoppen altijd bovenop blijven */
+@media (max-width: 640px) {
+  .lb-close, .lb-nav { width: 52px; height: 52px; border-radius: 26px; }
+}
+
+/* Als de afbeelding toch je taps "vangt" op touch-devices, laat taps door */
+@media (hover: none) {
+  #lb-image { pointer-events: none; }
+}
+
