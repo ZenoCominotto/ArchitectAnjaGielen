@@ -43,30 +43,30 @@ exports.handler = async function(event, context) {
 
         // Step 2: Check environment variables
         console.log("Step 2: Checking environment variables...");
-        const emailUser = process.env.EMAIL_USER_OUTLOOK;
-        const emailPass = process.env.EMAIL_PASS_OUTLOOK;
+        const emailUser = process.env.EMAIL_NEW;
+        const emailPass = process.env.EMAIL_PASS_NEW;
         
         if (!emailUser) {
-            console.error("Step 2: Error - EMAIL_USER_OUTLOOK is not set");
+            console.error("Step 2: Error - EMAIL_NEW is not set");
             return {
                 statusCode: 500,
                 headers,
                 body: JSON.stringify({ 
-                    message: "Server configuratie fout: EMAIL_USER_OUTLOOK niet ingesteld", 
-                    error: "Missing EMAIL_USER_OUTLOOK environment variable",
+                    message: "Server configuratie fout: EMAIL_NEW niet ingesteld", 
+                    error: "Missing EMAIL_NEW environment variable",
                     step: "checking_environment_variables"
                 })
             };
         }
         
         if (!emailPass) {
-            console.error("Step 2: Error - EMAIL_PASS_OUTLOOK is not set");
+            console.error("Step 2: Error - EMAIL_PASS_NEW is not set");
             return {
                 statusCode: 500,
                 headers,
                 body: JSON.stringify({ 
-                    message: "Server configuratie fout: EMAIL_PASS_OUTLOOK niet ingesteld", 
-                    error: "Missing EMAIL_PASS_OUTLOOK environment variable",
+                    message: "Server configuratie fout: EMAIL_PASS_NEW niet ingesteld", 
+                    error: "Missing EMAIL_PASS_NEW environment variable",
                     step: "checking_environment_variables"
                 })
             };
@@ -74,19 +74,17 @@ exports.handler = async function(event, context) {
         console.log("Step 2: Success - Environment variables found. User:", emailUser);
 
         // Step 3: Create transporter
-        console.log("Step 3: Creating SMTP transporter...");
+        console.log("Step 3: Creating Gmail SMTP transporter...");
         let transporter;
         try {
             transporter = nodemailer.createTransport({
-                host: "smtp.office365.com",
-                port: 587,
-                secure: false, // TLS wordt automatisch gestart op port 587
+                service: "gmail",
                 auth: {
                     user: emailUser,
                     pass: emailPass
                 }
             });
-            console.log("Step 3: Success - Transporter created");
+            console.log("Step 3: Success - Gmail transporter created");
         } catch (transporterError) {
             console.error("Step 3: Error creating transporter -", transporterError.message);
             return {
@@ -121,8 +119,8 @@ exports.handler = async function(event, context) {
         // Step 5: Prepare mail options
         console.log("Step 5: Preparing mail options...");
         let mailOptions = {
-            from: emailUser,
-            to: emailUser,
+            from: `"Architect Gielen website" <${emailUser}>`,
+            to: "architecgielen.site@gmail.com",
             subject: `Nieuw bericht van ${data.name}`,
             text: data.message,
             replyTo: data.email
