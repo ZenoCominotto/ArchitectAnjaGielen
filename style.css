@@ -547,6 +547,7 @@ blockquote {
 .ps-viewport {
   overflow: hidden;
   width: 100%;
+  padding: 12px 0;
 }
 
 .ps-track {
@@ -565,7 +566,8 @@ blockquote {
 }
 
 .ps-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
   text-align: center;
   background: #f9f9f9;
   border-radius: 10px;
@@ -573,18 +575,34 @@ blockquote {
   box-shadow: 0 2px 8px rgba(0,0,0,.08);
   color: inherit;
   text-decoration: none;
+  height: 100%;
+  margin-bottom: 4px;
+  box-sizing: border-box;
+}
+
+.ps-card img,
+.ps-card .gallery-image {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  border-radius: 5px;
+  margin: 0 0 10px 0;
+  display: block;
+  background: #f0f0f0;
 }
 
 .ps-card h3 {
   margin: 12px 0 6px;
   font-size: 18px;
   color: #333;
+  flex-shrink: 0;
 }
 
 .ps-card p {
   margin: 0;
   font-size: 14px;
   color: #666;
+  flex-shrink: 0;
 }
 
 .ps-btn {
@@ -612,10 +630,18 @@ blockquote {
 /* Responsive: 2 per rij op tablets, 1 per rij op mobiel */
 @media (max-width: 1024px) {
   .ps-slide { flex-basis: 50%; }
+  .ps-card img,
+  .ps-card .gallery-image {
+    height: 180px;
+  }
 }
 @media (max-width: 640px) {
   .project-slider { padding: 0 40px; }
   .ps-slide { flex-basis: 100%; }
+  .ps-card img,
+  .ps-card .gallery-image {
+    height: 220px;
+  }
 }
 
 /* No-JS fallback: track niet schuiven, gewoon onder elkaar */

@@ -40,7 +40,7 @@
             </a>
         </section>
 
-        <!-- <section class="contact-form">
+        <section class="contact-form">
             <h2>Stuur me een bericht</h2>
             <form id="contactForm">
                 <input type="text" name="name" placeholder="Naam" required>
@@ -51,7 +51,7 @@
             <p id="formMessage"></p>
 
 
-        </section> -->
+        </section>
     </main>
 
     <footer>
@@ -67,22 +67,69 @@
             };
 
             try {
-                const response = await fetch('/.netlify/functions/sendEmail', {
+                const result = document.getElementById('formMessage');
+                result.textContent = 'Verzenden...';
+                result.style.color = '#333';
+
+                const functionUrl = '/.netlify/functions/sendEmail';
+                console.log('Sending request to:', functionUrl);
+                console.log('Form data:', formData);
+
+                const response = await fetch(functionUrl, {
                     method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify(formData)
                 });
 
-                const result = document.getElementById('formMessage');
+                console.log('Response status:', response.status);
+                console.log('Response ok:', response.ok);
+
+                let responseData;
+                try {
+                    const text = await response.text();
+                    console.log('Response text:', text);
+                    responseData = text ? JSON.parse(text) : {};
+                } catch (parseErr) {
+                    console.error('Error parsing response:', parseErr);
+                    result.textContent = 'Fout bij lezen van server antwoord. Status: ' + response.status;
+                    result.style.color = 'red';
+                    return;
+                }
 
                 if(response.ok){
-                    result.textContent = 'Bericht verzonden!';
+                    result.textContent = responseData.message || 'Bericht verzonden!';
+                    result.style.color = 'green';
                     e.target.reset();
                 } else {
-                    result.textContent = 'Er is een fout opgetreden. Probeer later opnieuw.';
+                    // Display detailed error message
+                    const errorMsg = responseData.message || 'Er is een fout opgetreden.';
+                    const errorDetail = responseData.error ? ` (${responseData.error})` : '';
+                    const errorStep = responseData.step ? ` [Stap: ${responseData.step}]` : '';
+                    result.textContent = errorMsg + errorDetail + errorStep;
+                    result.style.color = 'red';
+                    console.error('Email error:', responseData);
                 }
             } catch (err) {
-                document.getElementById('formMessage').textContent = 'Er is een fout opgetreden. Probeer later opnieuw.';
-                console.error(err);
+                const result = document.getElementById('formMessage');
+                let errorMsg = 'Netwerkfout: ' + err.message;
+                
+                // Provide more specific error messages
+                if (err.message.includes('Failed to fetch')) {
+                    errorMsg = 'Kan niet verbinden met server. Controleer of de functie bestaat en of je online bent.';
+                } else if (err.message.includes('NetworkError')) {
+                    errorMsg = 'Netwerkfout. Controleer je internetverbinding.';
+                }
+                
+                result.textContent = errorMsg;
+                result.style.color = 'red';
+                console.error('Network error:', err);
+                console.error('Error details:', {
+                    message: err.message,
+                    stack: err.stack,
+                    name: err.name
+                });
             }
         });
     </script>
