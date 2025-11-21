@@ -3,85 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Architect Anja Gielen</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+  <title>Architect Anja Gielen – Under Construction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Montserrat', 'Century Gothic', Arial, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .uc-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 48px 40px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    }
+    .uc-card img {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 32px;
+      margin: 0 0 12px;
+    }
+    p {
+      margin: 0 0 18px;
+      line-height: 1.6;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: #222;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .contact-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+    .subtle {
+      font-size: 14px;
+      color: #777;
+      margin-top: 28px;
+    }
+  </style>
 </head>
 <body>
-
-  <!-- ===== HEADER ===== -->
-  <header>
-    <div class="header-container">
-      <img src="Pictures/Logo.png" alt="Logo Anja Gielen Architect" class="logo">
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">Over mij</a>
-        <a href="projecten.html">Projecten</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <!-- ===== HERO SECTIE ===== -->
-    <section class="hero">
-      <img src="Pictures/Woning Leopoldsburg - 2/Leopoldsburg1.JPG" alt="Modern huis" class="hero-image">
-      <div class="hero-overlay">
-        <div class="hero-text">
-          <h1>Tijdloze architectuur</h1>
-          <p>Met oog voor licht, eenvoud en detail.</p>
-          <a href="projecten.html" class="btn-primary">Bekijk projecten</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== KORTE INTRO ===== -->
-    <section class="intro">
-      <div class="intro-container">
-        <div class="intro-text">
-          <h2>Over Anja Gielen</h2>
-          <p>
-            Anja Gielen is een Belgische architecte gespecialiseerd in moderne en duurzame woningen.
-            Elk ontwerp ontstaat uit een nauwe samenwerking met de opdrachtgever en de omgeving,
-            met oog voor licht, ruimte en verfijnd detail.
-          </p>
-          <a href="about.html" class="btn-link">Meer over mij →</a>
-          <br>
-          <a href="contact.html" class="btn-link">Neem contact op →</a>
-        </div>
-        <img src="Pictures/foto-Anja.jpg" alt="Portret van Anja Gielen" class="intro-image">
-      </div>
-    </section>
-
-    <!-- ===== PROJECT PREVIEW ===== -->
-    <section class="home-projects">
-      <h2>Recente projecten</h2>
-      <div class="project-gallery">
-        <a href="projecten.html">
-          <img src="Pictures/Uitbreiding Bungalow - 1/Leopoldsburg1.JPG" alt="Modern huis" class="gallery-image">
-        </a>
-        <a href="projecten.html">
-          <img src="Pictures/Woning Leopoldsburg - 1/Leopoldsburg1.JPG" alt="Modern huis 2" class="gallery-image">
-        </a>
-      </div>
-      <p style="text-align:center; margin-top:10px;">
-        <a href="projecten.html" class="btn-link">Bekijk alle projecten →</a>
-      </p>
-    </section>
+  <main class="uc-card" role="main">
+    <img src="Pictures/Logo.png" alt="Architect Anja Gielen logo">
+    <h1>Website in opbouw</h1>
+    <p>Dank je wel voor je bezoek. Achter de schermen wordt er hard gewerkt aan een gloednieuwe online ervaring.</p>
+    <p>Heb je een vraag of wil je een project bespreken? Neem gerust rechtstreeks contact op.</p>
+    <a class="contact-link" href="mailto:anja@architectgielen.be">
+      <span>Mail anja@architectgielen.be</span>
+    </a>
+    <p class="subtle">Volg me op <a href="https://www.instagram.com/architectanjagielen" target="_blank" rel="noreferrer noopener">Instagram</a> of <a href="https://www.facebook.com/architectgielen" target="_blank" rel="noreferrer noopener">Facebook</a> voor updates.</p>
   </main>
-
-  <!-- ===== FOOTER ===== -->
-  <footer>
-    <p>Contact: <a href="mailto:anja@architectgielen.be">anja@architectgielen.be</a></p>
-    <div class="socials">
-      <a href="https://www.instagram.com/architectanjagielen" target="_blank" aria-label="Instagram">
-        <i class="fab fa-instagram fa-2x"></i>
-      </a>
-      <a href="https://www.facebook.com/architectgielen" target="_blank" aria-label="Facebook">
-        <i class="fab fa-facebook fa-2x"></i>
-      </a>
-    </div>
-  </footer>
-
 </body>
 </html>
+

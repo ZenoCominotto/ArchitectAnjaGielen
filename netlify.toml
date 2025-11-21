@@ -6,3 +6,8 @@
   port = 8888
   functions = "functions"
   publish = "."
+
+[redirects]
+  from = "/"
+  to = "/under-construction.html"
+  status = 200
