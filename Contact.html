@@ -10,10 +10,9 @@
 <body>
     <header>
         <div class="header-container">
-            <img src="Pictures/Logo.png" alt="Logo" class="logo">
+            <img src="Pictures/Logo-juist.png" alt="Logo" class="logo">
             <nav>
-                <a href="index.html">Home</a>
-                <a href="about.html">Over ons</a>
+                <a href="index-backup.html">Home</a>
                 <a href="projecten.html">Projecten</a>
                 <a href="contact.html" class="active">Contact</a>
             </nav>
@@ -69,7 +68,7 @@
             try {
                 const result = document.getElementById('formMessage');
                 result.textContent = 'Verzenden...';
-                result.style.color = '#333';
+                result.style.color = '#fff';
 
                 const functionUrl = '/.netlify/functions/sendEmail';
                 console.log('Sending request to:', functionUrl);

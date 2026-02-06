@@ -20,7 +20,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     font-family: "Century Gothic";
-    background-color: #fafafa;
+    background-color: #ffffff;
     color: #333;
 }
 
@@ -28,7 +28,7 @@ body {
    HEADER
 ============================= */
 header {
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     padding: 0;
 }
 
@@ -47,9 +47,9 @@ header {
 }
 
 .logo {
-    height: 100px;
+    height: 50px;
     width: auto;
-    margin-right: 20px;
+    margin-right: 24px;
 }
 
 /* =============================
@@ -72,7 +72,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #007acc;
+    color: #000000;
 }
 
 /* =============================
@@ -117,7 +117,7 @@ main {
     max-width: 800px;
     margin: 40px auto;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #000000;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     text-align: center;
@@ -126,11 +126,12 @@ main {
 .project h2 {
     font-size: 24px;
     margin-bottom: 15px;
+    color: #ffffff;
 }
 
 .project p {
     font-size: 16px;
-    color: #555;
+    color: #ffffff;
 }
 
 .project img {
@@ -174,7 +175,7 @@ main {
     max-width: 600px;
     margin: 30px auto;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #000000;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     font-family: "Century Gothic";
@@ -184,7 +185,7 @@ main {
     text-align: center;
     margin-bottom: 20px;
     font-size: 24px;
-    color: #333;
+    color: #ffffff;
 }
 
 .contact-form form {
@@ -213,7 +214,7 @@ main {
     padding: 12px;
     font-size: 16px;
     font-family: "Century Gothic";
-    background-color: #007acc;
+    background-color: #000000;
     color: white;
     border: none;
     border-radius: 5px;
@@ -222,8 +223,9 @@ main {
 }
 
 .contact-form button:hover {
-    background-color: #005f99;
+    background-color: #000000;
     transform: scale(1.02);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.18);
 }
 
 /* =============================
@@ -232,7 +234,7 @@ main {
 footer {
     text-align: center;
     padding: 5px 0 10px;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
 }
 
 footer a {
@@ -242,7 +244,7 @@ footer a {
 }
 
 footer a:hover {
-    color: #007acc;
+    color: #000000;
 }
 
 /* =============================
@@ -362,7 +364,7 @@ footer a:hover {
   display: inline-block;
   margin-top: 15px;
   padding: 10px 20px;
-  background-color: #007acc;
+  background-color: #000000;
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -370,7 +372,8 @@ footer a:hover {
 }
 
 .btn-primary:hover {
-  background-color: #005f99;
+  background-color: #000000;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.18);
 }
 
 /* =============================
@@ -419,7 +422,7 @@ footer a:hover {
 }
 
 .btn-link {
-  color: #007acc;
+  color: #000000;
   text-decoration: none;
   font-weight: bold;
 }
@@ -498,9 +501,10 @@ footer a:hover {
 }
 
 .light-bg {
-  background-color: #f7f7f7;
+  background-color: #000000;
   padding: 60px 20px;
   text-align: center;
+  color: #ffffff;
 }
 
 .vision-container {
@@ -510,14 +514,14 @@ footer a:hover {
 
 .vision-container p {
   font-size: 18px;
-  color: #444;
+  color: #ffffff;
   line-height: 1.6;
 }
 
-blockquote {
+.light-bg blockquote {
   margin-top: 25px;
   font-style: italic;
-  color: #007acc;
+  color: #ffffff;
   font-size: 20px;
 }
 
@@ -569,7 +573,7 @@ blockquote {
   display: flex;
   flex-direction: column;
   text-align: center;
-  background: #f9f9f9;
+  background: #ffffff;
   border-radius: 10px;
   padding: 14px;
   box-shadow: 0 2px 8px rgba(0,0,0,.08);
@@ -588,7 +592,7 @@ blockquote {
   border-radius: 5px;
   margin: 0 0 10px 0;
   display: block;
-  background: #f0f0f0;
+  background: #ffffff;
 }
 
 .ps-card h3 {
@@ -694,21 +698,23 @@ blockquote {
   height: 44px;
   border: none;
   border-radius: 22px;
-  background: rgba(255,255,255,.15);
+  background: rgba(0,0,0,.35);
+  border: 1px solid #ffffff;
   color: #fff;
   font-size: 28px;
   cursor: pointer;
   place-self: start end;
   margin: 8px;
 }
-.lb-close:hover { background: rgba(255,255,255,.25); }
+.lb-close:hover { background: rgba(0,0,0,.55); }
 
 .lb-nav {
   width: 44px;
   height: 44px;
   border: none;
   border-radius: 22px;
-  background: rgba(255,255,255,.15);
+  background: rgba(0,0,0,.35);
+  border: 1px solid #ffffff;
   color: #fff;
   font-size: 26px;
   cursor: pointer;
@@ -717,7 +723,7 @@ blockquote {
 }
 .lb-prev { grid-column: 1; grid-row: 2; }
 .lb-next { grid-column: 3; grid-row: 2; }
-.lb-nav:hover { background: rgba(255,255,255,.25); }
+.lb-nav:hover { background: rgba(0,0,0,.55); }
 
 @media (max-width: 640px) {
   .lb { grid-template-columns: 48px 1fr 48px; grid-template-rows: 48px 1fr 48px; }
@@ -747,4 +753,5 @@ blockquote {
 @media (hover: none) {
   #lb-image { pointer-events: none; }
 }
+
 
