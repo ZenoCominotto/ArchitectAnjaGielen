@@ -39,15 +39,16 @@ header {
 }
 
 .header-container {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0 16px;
 }
 
 .logo {
-    height: 50px;
+    height: auto;
     width: auto;
     margin-right: 24px;
 }
@@ -56,10 +57,12 @@ header {
    NAVIGATIE
 ============================= */
 nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    flex-grow: 1;
-    justify-content: space-around;
     align-items: center;
+    gap: clamp(20px, 4vw, 100px);
 }
 
 nav a {
@@ -73,6 +76,10 @@ nav a {
 
 nav a:hover {
     color: #000000;
+}
+
+html {
+  scrollbar-gutter: stable;
 }
 
 /* =============================
@@ -226,6 +233,32 @@ main {
     background-color: #000000;
     transform: scale(1.02);
     box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+}
+
+/* =============================
+   MAP-SECTION
+============================= */
+.map-section {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.map-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 450px;
+    display: block;
+    border: 0;
 }
 
 /* =============================
@@ -543,7 +576,7 @@ footer a:hover {
 /* ===== Project Slider ===== */
 .project-slider {
   position: relative;
-  max-width: 1200px;
+  max-width: auto;
   margin: 0 auto 2rem;
   padding: 0 48px; /* ruimte voor pijlen */
 }
@@ -564,13 +597,13 @@ footer a:hover {
 }
 
 .ps-slide {
-  flex: 0 0 33.3333%;     /* 3 per rij op desktop */
-  padding: 0 10px;
+  flex: auto;     /* 3 per rij op desktop */
+  padding: 0 16px;
   box-sizing: border-box;
 }
 
 .ps-card {
-  display: flex;
+  display: block;
   flex-direction: column;
   text-align: center;
   background: #ffffff;
@@ -579,18 +612,17 @@ footer a:hover {
   box-shadow: 0 2px 8px rgba(0,0,0,.08);
   color: inherit;
   text-decoration: none;
-  height: 100%;
+  height: auto;
   margin-bottom: 4px;
   box-sizing: border-box;
 }
 
 .ps-card img,
 .ps-card .gallery-image {
-  width: 100%;
-  height: 200px;
-  object-fit: contain;
-  border-radius: 5px;
-  margin: 0 0 10px 0;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+  border-radius: 6px;
   display: block;
   background: #ffffff;
 }
@@ -754,4 +786,39 @@ footer a:hover {
   #lb-image { pointer-events: none; }
 }
 
+/* =============================
+   PROJECTEN: slider full width + centered
+   (compenseert main padding: 1em)
+============================= */
+
+/* main heeft padding: 1em; -> compenseer dit zodat de slider tot aan de randen gaat */
+.home-projects {
+  margin-left: 0px;
+  margin-right: 0px;
+  width: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* slider zelf: 100% breed */
+.project-slider {
+  max-width: none;      /* verwijdert de 1200px limiet */
+  width: 100%;
+  margin: auto;
+  padding: 0 64px;      /* ruimte voor pijlen */
+  box-sizing: border-box;
+}
+
+/* viewport blijft 100% */
+.ps-viewport {
+  width: 100%;
+}
+
+/* optioneel: cards iets groter op grote schermen */
+@media (min-width: 1400px) {
+  .ps-card img,
+  .ps-card .gallery-image {
+    height: 240px;
+  }
+}
 

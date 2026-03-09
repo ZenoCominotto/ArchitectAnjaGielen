@@ -230,47 +230,53 @@
                     track.style.transition = 'transform 0.4s ease';
                 }
                 
-                const slideW = allSlides[0]?.getBoundingClientRect().width + 20 || 0;
+                const slideW = (() => {
+                    const s = track.querySelectorAll('.ps-slide');
+                    if (s.length < 2) return s[0]?.getBoundingClientRect().width || 0;
+                    return s[1].offsetLeft - s[0].offsetLeft; // echte stap incl padding/gap
+                })();
+
                 track.style.transform = `translate3d(${-index * slideW}px,0,0)`;
                 updateButtons();
             }
 
             function go(delta) {
-                if (isJumping) return; // Prevent rapid clicks during jump
-                
+                if (isJumping) return;
+
                 const newIndex = index + delta;
-                
-                // Check if we're about to cross the end boundary
-                if (newIndex >= slidesPerView + realSlideCount) {
-                    // Calculate overflow
-                    const overflow = newIndex - (slidesPerView + realSlideCount);
-                    index = newIndex;
-                    update();
-                    isJumping = true;
-                    // After transition completes, jump to equivalent position in prepended clones
-                    setTimeout(() => {
-                        index = slidesPerView + overflow;
-                        update(true);
-                        isJumping = false;
-                    }, 400);
-                }
-                // Check if we're about to cross the beginning boundary
-                else if (newIndex < slidesPerView) {
-                    // Calculate underflow
-                    const underflow = newIndex - slidesPerView;
-                    index = newIndex;
-                    update();
-                    isJumping = true;
-                    // After transition completes, jump to equivalent position in appended clones
-                    setTimeout(() => {
-                        index = slidesPerView + realSlideCount + underflow;
-                        update(true);
-                        isJumping = false;
-                    }, 400);
-                } else {
-                    index = newIndex;
-                    update();
-                }
+                const endBoundary = slidesPerView + realSlideCount;
+                const startBoundary = slidesPerView;
+
+                index = newIndex;
+                update(false);
+
+                // Binnen de echte range? klaar.
+                if (index >= startBoundary && index < endBoundary) return;
+
+                isJumping = true;
+
+                const onDone = (e) => {
+                    if (e.propertyName !== 'transform') return;
+                    track.removeEventListener('transitionend', onDone);
+
+                    // rechts voorbij einde
+                    if (index >= endBoundary) {
+                    const overflow = index - endBoundary;
+                    index = slidesPerView + overflow;
+                    }
+
+                    // links voorbij begin
+                    if (index < startBoundary) {
+                    const underflow = index - startBoundary; // negatief
+                    index = slidesPerView + realSlideCount + underflow;
+                    }
+
+                    update(true);           // spring zonder animatie
+                    void track.offsetHeight; // reflow
+                    isJumping = false;
+                };
+
+                track.addEventListener('transitionend', onDone, { once: true });
             }
 
             prevBtn?.addEventListener('click', () => go(-1));
