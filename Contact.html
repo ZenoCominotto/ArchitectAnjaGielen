@@ -10,7 +10,7 @@
 <body>
     <header>
         <div class="header-container">
-            <img src="Pictures/Logo-juist.png" alt="Logo" class="logo">
+            <img src="Pictures/Logo-juist-scherp-2.png" alt="Logo" class="logo">
             <nav>
                 <a href="index.html">Home</a>
                 <a href="projecten.html">Projecten</a>
@@ -24,9 +24,34 @@
 
         <section class="contact-info">
             <p>Neem gerust contact met me op voor meer informatie of een afspraak.</p>
-            <p><strong>Adres:</strong> De Scheuten 12, 3971 Heppen</p>
-            <p><strong>Telefoon:</strong> <a href="tel:+32 476 47 32 48">+32 476 47 32 48</a></p>
-            <p><strong>Email:</strong> <a href="mailto:anja@architectgielen.be">anja@architectgielen.be</a></p>
+            <div class="contact-details" aria-label="Contactgegevens">
+                <article class="contact-detail">
+                    <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                    <div>
+                        <h2>Adres</h2>
+                        <address>
+                            De Scheuten 12<br>
+                            3971 Heppen
+                        </address>
+                    </div>
+                </article>
+
+                <article class="contact-detail">
+                    <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                    <div>
+                        <h2>Telefoon</h2>
+                        <a href="tel:+32476473248">+32 476 47 32 48</a>
+                    </div>
+                </article>
+
+                <article class="contact-detail">
+                    <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                    <div>
+                        <h2>Email</h2>
+                        <a href="mailto:anja@architectgielen.be">anja@architectgielen.be</a>
+                    </div>
+                </article>
+            </div>
         </section>
 
         <section class="socials">
@@ -42,9 +67,14 @@
         <section class="contact-form">
             <h2>Stuur me een bericht</h2>
             <form id="contactForm">
+                <div class="form-honeypot" aria-hidden="true">
+                    <label for="website">Website</label>
+                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                </div>
                 <input type="text" name="name" placeholder="Naam" required>
                 <input type="email" name="email" placeholder="E-mail" required>
                 <textarea name="message" placeholder="Uw bericht..." required></textarea>
+                <input type="hidden" name="captchaToken" value="">
                 <button type="submit">Verstuur</button>
             </form>
             <p id="formMessage"></p>
@@ -75,7 +105,9 @@
             const formData = {
                 name: e.target.name.value,
                 email: e.target.email.value,
-                message: e.target.message.value
+                message: e.target.message.value,
+                website: e.target.website.value,
+                captchaToken: e.target.captchaToken.value
             };
 
             try {
@@ -84,9 +116,6 @@
                 result.style.color = '#fff';
 
                 const functionUrl = '/.netlify/functions/sendEmail';
-                console.log('Sending request to:', functionUrl);
-                console.log('Form data:', formData);
-
                 const response = await fetch(functionUrl, {
                     method: 'POST',
                     headers: {
@@ -95,16 +124,11 @@
                     body: JSON.stringify(formData)
                 });
 
-                console.log('Response status:', response.status);
-                console.log('Response ok:', response.ok);
-
                 let responseData;
                 try {
                     const text = await response.text();
-                    console.log('Response text:', text);
                     responseData = text ? JSON.parse(text) : {};
                 } catch (parseErr) {
-                    console.error('Error parsing response:', parseErr);
                     result.textContent = 'Fout bij lezen van server antwoord. Status: ' + response.status;
                     result.style.color = 'red';
                     return;
@@ -115,13 +139,8 @@
                     result.style.color = 'green';
                     e.target.reset();
                 } else {
-                    // Display detailed error message
-                    const errorMsg = responseData.message || 'Er is een fout opgetreden.';
-                    const errorDetail = responseData.error ? ` (${responseData.error})` : '';
-                    const errorStep = responseData.step ? ` [Stap: ${responseData.step}]` : '';
-                    result.textContent = errorMsg + errorDetail + errorStep;
+                    result.textContent = responseData.message || 'Er is een fout opgetreden. Probeer het later opnieuw.';
                     result.style.color = 'red';
-                    console.error('Email error:', responseData);
                 }
             } catch (err) {
                 const result = document.getElementById('formMessage');
@@ -136,12 +155,6 @@
                 
                 result.textContent = errorMsg;
                 result.style.color = 'red';
-                console.error('Network error:', err);
-                console.error('Error details:', {
-                    message: err.message,
-                    stack: err.stack,
-                    name: err.name
-                });
             }
         });
     </script>
