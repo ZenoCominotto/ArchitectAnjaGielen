@@ -75,6 +75,14 @@
                 <input type="email" name="email" placeholder="E-mail" required>
                 <textarea name="message" placeholder="Uw bericht..." required></textarea>
                 <input type="hidden" name="captchaToken" value="">
+                <div id="hcaptcha-container"></div>
+                <p id="captchaDisclosure" class="captcha-disclosure" hidden>
+                    Deze site is beschermd door hCaptcha en hun
+                    <a href="https://www.hcaptcha.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>
+                    en
+                    <a href="https://www.hcaptcha.com/terms" target="_blank" rel="noopener">Terms of Service</a>
+                    zijn van toepassing.
+                </p>
                 <button type="submit">Verstuur</button>
             </form>
             <p id="formMessage"></p>
@@ -100,20 +108,90 @@
         <p>&copy; 2025 Architect Anja Gielen</p>
     </footer>
     <script>
-        document.getElementById('contactForm').addEventListener('submit', async function(e){
-            e.preventDefault();
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+        let hcaptchaWidgetId = null;
+        let hcaptchaReady = false;
+        let pendingCaptchaSubmit = false;
+
+        function showFormMessage(message, color) {
+            formMessage.textContent = message;
+            formMessage.style.color = color;
+        }
+
+        function loadHCaptchaScript() {
+            if (document.querySelector('script[data-hcaptcha-script]')) {
+                return;
+            }
+
+            const script = document.createElement('script');
+            script.src = 'https://js.hcaptcha.com/1/api.js?render=explicit';
+            script.async = true;
+            script.defer = true;
+            script.dataset.hcaptchaScript = 'true';
+            script.onload = function() {
+                hcaptchaReady = true;
+                renderHCaptcha();
+            };
+            script.onerror = function() {
+                showFormMessage('Captcha kon niet geladen worden. Probeer het later opnieuw.', 'red');
+            };
+            document.head.appendChild(script);
+        }
+
+        function renderHCaptcha() {
+            const container = document.getElementById('hcaptcha-container');
+
+            if (!window.hcaptcha || !window.hcaptchaSiteKey || hcaptchaWidgetId !== null) {
+                return;
+            }
+
+            hcaptchaWidgetId = window.hcaptcha.render(container, {
+                sitekey: window.hcaptchaSiteKey,
+                callback: function(token) {
+                    contactForm.captchaToken.value = token;
+                    if (pendingCaptchaSubmit) {
+                        pendingCaptchaSubmit = false;
+                        sendContactForm();
+                    }
+                },
+                'expired-callback': function() {
+                    contactForm.captchaToken.value = '';
+                },
+                'error-callback': function() {
+                    pendingCaptchaSubmit = false;
+                    contactForm.captchaToken.value = '';
+                    showFormMessage('Captcha controle is mislukt. Probeer opnieuw.', 'red');
+                }
+            });
+        }
+
+        async function initCaptcha() {
+            try {
+                const response = await fetch('/.netlify/functions/contactConfig');
+                const config = response.ok ? await response.json() : {};
+
+                if (config.hcaptchaSiteKey) {
+                    window.hcaptchaSiteKey = config.hcaptchaSiteKey;
+                    document.getElementById('captchaDisclosure').hidden = false;
+                    loadHCaptchaScript();
+                }
+            } catch (error) {
+                showFormMessage('Captcha configuratie kon niet geladen worden. Probeer het later opnieuw.', 'red');
+            }
+        }
+
+        async function sendContactForm() {
             const formData = {
-                name: e.target.name.value,
-                email: e.target.email.value,
-                message: e.target.message.value,
-                website: e.target.website.value,
-                captchaToken: e.target.captchaToken.value
+                name: contactForm.name.value,
+                email: contactForm.email.value,
+                message: contactForm.message.value,
+                website: contactForm.website.value,
+                captchaToken: contactForm.captchaToken.value
             };
 
             try {
-                const result = document.getElementById('formMessage');
-                result.textContent = 'Verzenden...';
-                result.style.color = '#fff';
+                showFormMessage('Verzenden...', '#fff');
 
                 const functionUrl = '/.netlify/functions/sendEmail';
                 const response = await fetch(functionUrl, {
@@ -129,21 +207,22 @@
                     const text = await response.text();
                     responseData = text ? JSON.parse(text) : {};
                 } catch (parseErr) {
-                    result.textContent = 'Fout bij lezen van server antwoord. Status: ' + response.status;
-                    result.style.color = 'red';
+                    showFormMessage('Fout bij lezen van server antwoord. Status: ' + response.status, 'red');
                     return;
                 }
 
                 if(response.ok){
-                    result.textContent = responseData.message || 'Bericht verzonden!';
-                    result.style.color = 'green';
-                    e.target.reset();
+                    showFormMessage(responseData.message || 'Bericht verzonden!', 'green');
+                    contactForm.reset();
                 } else {
-                    result.textContent = responseData.message || 'Er is een fout opgetreden. Probeer het later opnieuw.';
-                    result.style.color = 'red';
+                    showFormMessage(responseData.message || 'Er is een fout opgetreden. Probeer het later opnieuw.', 'red');
+                }
+
+                contactForm.captchaToken.value = '';
+                if (window.hcaptcha && hcaptchaWidgetId !== null) {
+                    window.hcaptcha.reset(hcaptchaWidgetId);
                 }
             } catch (err) {
-                const result = document.getElementById('formMessage');
                 let errorMsg = 'Netwerkfout: ' + err.message;
                 
                 // Provide more specific error messages
@@ -153,10 +232,30 @@
                     errorMsg = 'Netwerkfout. Controleer je internetverbinding.';
                 }
                 
-                result.textContent = errorMsg;
-                result.style.color = 'red';
+                showFormMessage(errorMsg, 'red');
             }
+        }
+
+        contactForm.addEventListener('submit', async function(e){
+            e.preventDefault();
+
+            if (hcaptchaWidgetId !== null) {
+                if (!hcaptchaReady || !window.hcaptcha) {
+                    showFormMessage('Captcha is nog aan het laden. Probeer opnieuw.', 'red');
+                    return;
+                }
+
+                if (!contactForm.captchaToken.value) {
+                    pendingCaptchaSubmit = true;
+                    window.hcaptcha.execute(hcaptchaWidgetId);
+                    return;
+                }
+            }
+
+            await sendContactForm();
         });
+
+        initCaptcha();
     </script>
 
 </body>

@@ -149,6 +149,7 @@ function safeLogBlocked(reason, event, data = {}) {
 async function verifyCaptcha(token, ip) {
     const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY;
     const hcaptchaSecret = process.env.HCAPTCHA_SECRET_KEY;
+    const hcaptchaSiteKey = process.env.HCAPTCHA_SITE_KEY;
 
     if (!recaptchaSecret && !hcaptchaSecret) {
         return { ok: true, skipped: true };
@@ -168,6 +169,10 @@ async function verifyCaptcha(token, ip) {
         secret,
         response: token
     });
+
+    if (provider === "hcaptcha" && hcaptchaSiteKey) {
+        params.set("sitekey", hcaptchaSiteKey);
+    }
 
     if (ip && ip !== "unknown") {
         params.set("remoteip", ip);
