@@ -9,7 +9,7 @@ const headers = {
 
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX = 3;
-const rateLimitStore = new Map();
+const blockedAttemptStore = new Map();
 
 function jsonResponse(statusCode, body) {
     return {
@@ -36,12 +36,12 @@ function getClientIp(event) {
 }
 
 function pruneRateLimitStore(now = Date.now()) {
-    for (const [ip, hits] of rateLimitStore.entries()) {
+    for (const [ip, hits] of blockedAttemptStore.entries()) {
         const recentHits = hits.filter((timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS);
         if (recentHits.length === 0) {
-            rateLimitStore.delete(ip);
+            blockedAttemptStore.delete(ip);
         } else {
-            rateLimitStore.set(ip, recentHits);
+            blockedAttemptStore.set(ip, recentHits);
         }
     }
 }
@@ -49,17 +49,29 @@ function pruneRateLimitStore(now = Date.now()) {
 function checkRateLimit(ip, now = Date.now()) {
     pruneRateLimitStore(now);
 
-    const hits = rateLimitStore.get(ip) || [];
+    const hits = blockedAttemptStore.get(ip) || [];
     const recentHits = hits.filter((timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS);
 
-    if (recentHits.length >= RATE_LIMIT_MAX) {
-        rateLimitStore.set(ip, recentHits);
-        return false;
+    if (recentHits.length > 0) {
+        blockedAttemptStore.set(ip, recentHits);
+    } else {
+        blockedAttemptStore.delete(ip);
     }
 
+    return recentHits.length < RATE_LIMIT_MAX;
+}
+
+function recordBlockedAttempt(ip, now = Date.now()) {
+    pruneRateLimitStore(now);
+
+    const hits = blockedAttemptStore.get(ip) || [];
+    const recentHits = hits.filter((timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS);
     recentHits.push(now);
-    rateLimitStore.set(ip, recentHits);
-    return true;
+    blockedAttemptStore.set(ip, recentHits);
+}
+
+function clearBlockedAttempts(ip) {
+    blockedAttemptStore.delete(ip);
 }
 
 function isValidEmail(email) {
@@ -244,6 +256,7 @@ async function handler(event) {
 
     const validation = validateSubmission(data);
     if (!validation.ok) {
+        recordBlockedAttempt(ip);
         safeLogBlocked(validation.reason, event, data);
         return jsonResponse(400, { message: validation.publicMessage });
     }
@@ -251,11 +264,13 @@ async function handler(event) {
     try {
         const captcha = await verifyCaptcha(validation.value.captchaToken, ip);
         if (!captcha.ok) {
+            recordBlockedAttempt(ip);
             safeLogBlocked(captcha.reason, event, data);
             return jsonResponse(400, { message: "Je bericht kon niet worden verstuurd. Probeer het later opnieuw." });
         }
 
         const info = await sendContactEmail(validation.value);
+        clearBlockedAttempts(ip);
 
         return jsonResponse(200, {
             message: "Email succesvol verstuurd!",
@@ -277,10 +292,12 @@ exports._test = {
     RATE_LIMIT_MAX,
     RATE_LIMIT_WINDOW_MS,
     checkRateLimit,
+    clearBlockedAttempts,
     getClientIp,
     hasLongToken,
     isValidEmail,
     looksLikeRandomString,
-    rateLimitStore,
+    recordBlockedAttempt,
+    rateLimitStore: blockedAttemptStore,
     validateSubmission
 };

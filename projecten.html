@@ -10,7 +10,7 @@
 <body>
     <header>
         <div class="header-container">
-            <img src="Pictures/Logo-juist-scherp-2.png" alt="Logo" class="logo">
+            <img src="Pictures/Logo-wit.png" alt="Logo" class="logo">
             <nav>
                 <a href="index.html">Home</a>
                 <a href="projecten.html" class="active">Projecten</a>
@@ -25,7 +25,8 @@
 
         <section class="home-projects" aria-label="Recente projecten">
 
-            <div class="project-slider" aria-roledescription="carousel" aria-label="Projecten slider">
+            <h3 class="project-slider-title">Moderne woningen</h3>
+            <div class="project-slider" aria-roledescription="carousel" aria-label="Moderne woningen slider">
                 <button class="ps-btn ps-btn-prev" aria-label="Vorige project">‹</button>
 
                 <div class="ps-viewport">
@@ -36,16 +37,6 @@
                         class="ps-card"
                         data-gallery="#WoningLeopoldsburg1">
                         <img src="Pictures/Woning Leopoldsburg - 1/Leopoldsburg1.JPG" class="gallery-image">
-                        
-                    </a>
-                    </li>
-
-                    <!-- PROJECT 2 -->
-                    <li class="ps-slide" aria-roledescription="slide">
-                    <a href="#"
-                        class="ps-card"
-                        data-gallery="#WoningLeopoldsburg2">
-                        <img src="Pictures/Woning Leopoldsburg - 2/Leopoldsburg1.JPG"  class="gallery-image">
                         
                     </a>
                     </li>
@@ -75,7 +66,30 @@
                     <a href="#"
                         class="ps-card"
                         data-gallery="#Bungalow1">
-                        <img src="Pictures/Uitbreiding Bungalow - 1/Leopoldsburg1.JPG"  class="gallery-image">
+                        <img src="Pictures/Uitbreiding Bungalow - 1/Leopoldsburg2.JPG"  class="gallery-image">
+                        
+                    </a>
+                    </li>
+
+                </ul>
+                </div>
+
+                <button class="ps-btn ps-btn-next" aria-label="Volgende project">›</button>
+            </div>
+            
+
+            <h3 class="project-slider-title">Landelijke woningen</h3>
+            <div class="project-slider" aria-roledescription="carousel" aria-label="Landelijke woningen slider">
+                <button class="ps-btn ps-btn-prev" aria-label="Vorige project">‹</button>
+
+                <div class="ps-viewport">
+                <ul class="ps-track">
+                    <!-- PROJECT 2 -->
+                    <li class="ps-slide" aria-roledescription="slide">
+                    <a href="#"
+                        class="ps-card"
+                        data-gallery="#WoningLeopoldsburg2">
+                        <img src="Pictures/Woning Leopoldsburg - 2/Leopoldsburg1.JPG"  class="gallery-image">
                         
                     </a>
                     </li>
@@ -94,6 +108,7 @@
 
                 <button class="ps-btn ps-btn-next" aria-label="Volgende project">›</button>
             </div>
+
 
             <!-- Verborgen galerijen (koppel via data-gallery) -->
             <div id="galleries" hidden>
@@ -138,8 +153,8 @@
                 <div id="Appartement1" class="gallery-set">
                 <img src="Pictures/Appartement Leopoldsburg - 1/Leopoldsburg1.JPG"  class="gallery-image">
                 <img src="Pictures/Appartement Leopoldsburg - 1/Leopoldsburg2.JPG"  class="gallery-image">
-                <img src="Pictures/Uitbreiding Bungalow - 1/Leopoldsburg3.JPG"  class="gallery-image">
-                <img src="Pictures/Uitbreiding Bungalow - 1/Leopoldsburg4.JPG"  class="gallery-image">
+                <img src="Pictures/Appartement Leopoldsburg - 1/Leopoldsburg3.JPG"  class="gallery-image">
+                <img src="Pictures/Appartement Leopoldsburg - 1/Leopoldsburg4.JPG"  class="gallery-image">
                 </div>
             </div>
             </section>
@@ -175,20 +190,29 @@
 
         (function () {
             // ======= PROJECT SLIDER =======
-            const slider = document.querySelector('.project-slider');
-            if (slider) {
+            document.querySelectorAll('.project-slider').forEach(initProjectSlider);
+
+            function initProjectSlider(slider) {
             const track = slider.querySelector('.ps-track');
             const originalSlides = Array.from(slider.querySelectorAll('.ps-slide'));
             const prevBtn = slider.querySelector('.ps-btn-prev');
             const nextBtn = slider.querySelector('.ps-btn-next');
 
+            if (!track || !originalSlides.length) return;
+
             let slidesPerView = getSlidesPerView();
+            let cloneCount = getCloneCount();
+            const realSlideCount = originalSlides.length;
 
             function getSlidesPerView() {
                 const w = window.innerWidth;
                 if (w <= 640) return 1;
                 if (w <= 1024) return 2;
                 return 3;
+            }
+
+            function getCloneCount() {
+                return Math.min(slidesPerView, originalSlides.length);
             }
 
             // Clone slides for infinite loop
@@ -198,14 +222,16 @@
                 existingClones.forEach(clone => clone.remove());
 
                 // Clone last slides and prepend
-                for (let i = 0; i < slidesPerView; i++) {
+                cloneCount = getCloneCount();
+
+                for (let i = 0; i < cloneCount; i++) {
                     const clone = originalSlides[originalSlides.length - 1 - i].cloneNode(true);
                     clone.classList.add('ps-slide-clone');
                     track.insertBefore(clone, track.firstChild);
                 }
 
                 // Clone first slides and append
-                for (let i = 0; i < slidesPerView; i++) {
+                for (let i = 0; i < cloneCount; i++) {
                     const clone = originalSlides[i].cloneNode(true);
                     clone.classList.add('ps-slide-clone');
                     track.appendChild(clone);
@@ -214,8 +240,7 @@
 
             setupInfiniteSlides();
             const allSlides = Array.from(track.querySelectorAll('.ps-slide'));
-            const realSlideCount = originalSlides.length;
-            let index = slidesPerView; // Start at the first real slide (after prepended clones)
+            let index = cloneCount; // Start at the first real slide (after prepended clones)
             let isJumping = false;
 
             function updateButtons() {
@@ -244,8 +269,8 @@
                 if (isJumping) return;
 
                 const newIndex = index + delta;
-                const endBoundary = slidesPerView + realSlideCount;
-                const startBoundary = slidesPerView;
+                const endBoundary = cloneCount + realSlideCount;
+                const startBoundary = cloneCount;
 
                 index = newIndex;
                 update(false);
@@ -262,13 +287,13 @@
                     // rechts voorbij einde
                     if (index >= endBoundary) {
                     const overflow = index - endBoundary;
-                    index = slidesPerView + overflow;
+                    index = cloneCount + overflow;
                     }
 
                     // links voorbij begin
                     if (index < startBoundary) {
                     const underflow = index - startBoundary; // negatief
-                    index = slidesPerView + realSlideCount + underflow;
+                    index = cloneCount + realSlideCount + underflow;
                     }
 
                     update(true);           // spring zonder animatie
@@ -299,7 +324,7 @@
                     const newAllSlides = Array.from(track.querySelectorAll('.ps-slide'));
                     allSlides.length = 0;
                     allSlides.push(...newAllSlides);
-                    index = slidesPerView;
+                    index = cloneCount;
                 }
                 update();
             });

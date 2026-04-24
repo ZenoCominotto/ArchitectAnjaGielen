@@ -52,17 +52,38 @@ test("blocks random-string spam in name and message", () => {
     assert.equal(messageResult.reason, "spam_message");
 });
 
-test("rate limits more than three submissions per ten minutes per IP", () => {
+test("rate limits more than three blocked submissions per ten minutes per IP", () => {
     const ip = "203.0.113.44";
     const now = Date.now();
 
     _test.rateLimitStore.clear();
 
     assert.equal(_test.checkRateLimit(ip, now), true);
+    _test.recordBlockedAttempt(ip, now);
+
     assert.equal(_test.checkRateLimit(ip, now + 1000), true);
+    _test.recordBlockedAttempt(ip, now + 1000);
+
     assert.equal(_test.checkRateLimit(ip, now + 2000), true);
+    _test.recordBlockedAttempt(ip, now + 2000);
+
     assert.equal(_test.checkRateLimit(ip, now + 3000), false);
     assert.equal(_test.checkRateLimit(ip, now + _test.RATE_LIMIT_WINDOW_MS + 1), true);
+
+    _test.rateLimitStore.clear();
+});
+
+test("successful submissions can clear previous blocked attempts", () => {
+    const ip = "203.0.113.45";
+    const now = Date.now();
+
+    _test.rateLimitStore.clear();
+    _test.recordBlockedAttempt(ip, now);
+    _test.recordBlockedAttempt(ip, now + 1000);
+    _test.clearBlockedAttempts(ip);
+
+    assert.equal(_test.checkRateLimit(ip, now + 2000), true);
+    assert.equal(_test.rateLimitStore.has(ip), false);
 
     _test.rateLimitStore.clear();
 });
